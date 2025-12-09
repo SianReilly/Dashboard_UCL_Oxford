@@ -53,7 +53,7 @@ hide_streamlit_style = """
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# Custom CSS - Hot/Fire theme
+# Custom CSS - Hot/Fire theme with readable text
 st.markdown(
     """
     <style>
@@ -63,14 +63,23 @@ st.markdown(
         }
         div.stMultiSelect label, div.stSelectbox label, div.stSlider label {
             color: white !important;
+            font-weight: bold !important;
         }
         div[data-baseweb="tag"] {
             background-color: #ff4500 !important;
             color: white !important;
         }
-        /* Slider styling */
-        div[data-baseweb="slider"] [role="slider"] {
-            background-color: #ff4500 !important;
+        /* Make all text white and bold for readability */
+        div[data-testid="stMarkdownContainer"] p {
+            color: white !important;
+        }
+        /* Metric labels */
+        div[data-testid="stMetricLabel"] {
+            color: white !important;
+            font-weight: bold !important;
+        }
+        div[data-testid="stMetricValue"] {
+            color: white !important;
         }
     </style>
     """,
@@ -173,7 +182,7 @@ try:
         st.markdown(f"""
             <div style='text-align: center; padding: 20px; background-color: rgba(255, 107, 53, 0.2); border-radius: 10px; border: 2px solid #ff6b35;'>
                 <h2 style='color: #ff6b35; margin: 0;'>{current_avg:.1f}</h2>
-                <p style='color: white; margin: 5px 0; font-size: 14px;'>Baseline Hot Days/Year</p>
+                <p style='color: white; margin: 5px 0; font-size: 14px; font-weight: bold;'>Baseline Hot Days/Year</p>
                 <p style='color: #ffaa80; font-size: 11px;'>({baseline})</p>
             </div>
         """, unsafe_allow_html=True)
@@ -182,7 +191,7 @@ try:
         st.markdown(f"""
             <div style='text-align: center; padding: 20px; background-color: rgba(255, 69, 0, 0.3); border-radius: 10px; border: 2px solid #ff4500;'>
                 <h2 style='color: #ff4500; margin: 0;'>{future_avg:.1f}</h2>
-                <p style='color: white; margin: 5px 0; font-size: 14px;'>Projected Hot Days/Year</p>
+                <p style='color: white; margin: 5px 0; font-size: 14px; font-weight: bold;'>Projected Hot Days/Year</p>
                 <p style='color: #ff9966; font-size: 11px;'>({warming_scenario} warming)</p>
             </div>
         """, unsafe_allow_html=True)
@@ -191,7 +200,7 @@ try:
         st.markdown(f"""
             <div style='text-align: center; padding: 20px; background-color: rgba(220, 20, 60, 0.3); border-radius: 10px; border: 2px solid #dc143c;'>
                 <h2 style='color: #dc143c; margin: 0;'>+{increase:.1f}</h2>
-                <p style='color: white; margin: 5px 0; font-size: 14px;'>Increase in Hot Days</p>
+                <p style='color: white; margin: 5px 0; font-size: 14px; font-weight: bold;'>Increase in Hot Days</p>
                 <p style='color: #ff6b9d; font-size: 11px;'>Absolute Change</p>
             </div>
         """, unsafe_allow_html=True)
@@ -200,7 +209,7 @@ try:
         st.markdown(f"""
             <div style='text-align: center; padding: 20px; background-color: rgba(178, 34, 34, 0.3); border-radius: 10px; border: 2px solid #b22222;'>
                 <h2 style='color: #ff6347; margin: 0;'>+{increase_pct:.0f}%</h2>
-                <p style='color: white; margin: 5px 0; font-size: 14px;'>Percentage Increase</p>
+                <p style='color: white; margin: 5px 0; font-size: 14px; font-weight: bold;'>Percentage Increase</p>
                 <p style='color: #ff9999; font-size: 11px;'>Relative Change</p>
             </div>
         """, unsafe_allow_html=True)
@@ -235,9 +244,8 @@ try:
         title_x=0.5,
         title_font=dict(size=16, color='white'),
         coloraxis_colorbar=dict(
-            title='Hot Days/Year',
-            tickfont=dict(color='white'),
-            titlefont=dict(color='white')
+            title=dict(text='Hot Days/Year', font=dict(color='white', size=12)),
+            tickfont=dict(color='white')
         ),
         margin=dict(l=0, r=0, t=40, b=0)
     )
@@ -269,9 +277,8 @@ try:
         title_x=0.5,
         title_font=dict(size=16, color='white'),
         coloraxis_colorbar=dict(
-            title='Hot Days/Year',
-            tickfont=dict(color='white'),
-            titlefont=dict(color='white')
+            title=dict(text='Hot Days/Year', font=dict(color='white', size=12)),
+            tickfont=dict(color='white')
         ),
         margin=dict(l=0, r=0, t=40, b=0)
     )
@@ -305,9 +312,8 @@ try:
         title_x=0.5,
         title_font=dict(size=16, color='white'),
         coloraxis_colorbar=dict(
-            title='Change (days/year)',
-            tickfont=dict(color='white'),
-            titlefont=dict(color='white')
+            title=dict(text='Change (days/year)', font=dict(color='white', size=12)),
+            tickfont=dict(color='white')
         ),
         margin=dict(l=0, r=0, t=40, b=0)
     )
@@ -334,9 +340,8 @@ try:
         title_x=0.5,
         title_font=dict(size=16, color='white'),
         coloraxis_colorbar=dict(
-            title='Hot Days/Year',
-            tickfont=dict(color='white'),
-            titlefont=dict(color='white')
+            title=dict(text='Hot Days/Year', font=dict(color='white', size=12)),
+            tickfont=dict(color='white')
         ),
         margin=dict(l=0, r=0, t=40, b=0)
     )
@@ -373,9 +378,8 @@ try:
         title_x=0.5,
         title_font=dict(size=16, color='white'),
         coloraxis_colorbar=dict(
-            title='% Increase',
-            tickfont=dict(color='white'),
-            titlefont=dict(color='white')
+            title=dict(text='% Increase', font=dict(color='white', size=12)),
+            tickfont=dict(color='white')
         ),
         margin=dict(l=0, r=0, t=40, b=0)
     )
@@ -437,14 +441,15 @@ try:
         height=550,
         xaxis=dict(
             gridcolor='rgba(255,255,255,0.1)',
-            tickfont=dict(color='white')
+            tickfont=dict(color='white'),
+            title_font=dict(color='white')
         ),
         yaxis=dict(
             gridcolor='rgba(255,255,255,0.1)',
-            tickfont=dict(color='white')
+            tickfont=dict(color='white'),
+            title_font=dict(color='white')
         ),
-        legend=dict(font=dict(color='white')),
-        margin=dict(l=50, r=20, t=50, b=50)
+        legend=dict(font=dict(color='white'))
     )
     
     # ============ CHART: Regional Breakdown ============
@@ -503,14 +508,15 @@ try:
         barmode='group',
         xaxis=dict(
             tickfont=dict(color='white'),
-            showgrid=False
+            showgrid=False,
+            title_font=dict(color='white')
         ),
         yaxis=dict(
             gridcolor='rgba(255,255,255,0.1)',
-            tickfont=dict(color='white')
+            tickfont=dict(color='white'),
+            title_font=dict(color='white')
         ),
-        legend=dict(font=dict(color='white')),
-        margin=dict(l=50, r=20, t=50, b=50)
+        legend=dict(font=dict(color='white'))
     )
     
     # ============ Display Section 1: Side-by-Side Comparison Maps ============
@@ -520,8 +526,8 @@ try:
     with col1:
         st.plotly_chart(fig_map2, use_container_width=True)
         st.markdown("""
-            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.3); border-radius: 5px;'>
-            <b>Historical Context:</b> The baseline map (blue scale) shows historical hot days were relatively rare across most of the UK, 
+            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 5px;'>
+            <b style='color: #4169e1;'>Historical Context:</b> The baseline map (blue scale) shows historical hot days were relatively rare across most of the UK, 
             with very few regions experiencing significant numbers. Notice the cooler colors dominating the map—
             this is what "normal" used to look like.
             </p>
@@ -530,8 +536,8 @@ try:
     with col2:
         st.plotly_chart(fig_map1, use_container_width=True)
         st.markdown("""
-            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.3); border-radius: 5px;'>
-            <b>Future Projections:</b> Under warming scenarios, the transformation is dramatic. The red-orange "hot" scale 
+            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 5px;'>
+            <b style='color: #ff6b35;'>Future Projections:</b> Under warming scenarios, the transformation is dramatic. The red-orange "hot" scale 
             reveals significant increases across all regions, with southern areas showing the most intense changes. 
             Compare bubble sizes to see the exponential increase in hot day frequency.
             </p>
@@ -544,8 +550,8 @@ try:
     with col1:
         st.plotly_chart(fig_map3, use_container_width=True)
         st.markdown("""
-            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.3); border-radius: 5px;'>
-            <b>Absolute Change:</b> This difference map shows the raw increase in hot days per year. Red areas indicate 
+            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 5px;'>
+            <b style='color: #dc143c;'>Absolute Change:</b> This difference map shows the raw increase in hot days per year. Red areas indicate 
             the largest absolute increases—some regions could see 10+ additional extremely hot days per year. 
             Southern England faces the most severe changes, while Scotland shows more moderate increases.
             </p>
@@ -554,8 +560,8 @@ try:
     with col2:
         st.plotly_chart(fig_map4, use_container_width=True)
         st.markdown("""
-            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.3); border-radius: 5px;'>
-            <b>Heat Intensity Zones:</b> The density heatmap reveals geographic clustering of extreme heat. 
+            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 5px;'>
+            <b style='color: #ff6b35;'>Heat Intensity Zones:</b> The density heatmap reveals geographic clustering of extreme heat. 
             Bright red zones indicate areas where multiple grid points show very high values—these are the future 
             "heat islands" where infrastructure, health services, and cooling systems will face maximum stress.
             </p>
@@ -568,8 +574,8 @@ try:
     with col1:
         st.plotly_chart(fig_map5, use_container_width=True)
         st.markdown("""
-            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.3); border-radius: 5px;'>
-            <b>Relative Change:</b> Percentage increases tell a different story than absolute numbers. Areas starting 
+            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 5px;'>
+            <b style='color: #9d4edd;'>Relative Change:</b> Percentage increases tell a different story than absolute numbers. Areas starting 
             from near-zero baselines show dramatic percentage jumps (purple/yellow zones). While southern regions 
             have higher absolute values, northern areas may experience greater relative disruption to established norms.
             </p>
@@ -578,8 +584,8 @@ try:
     with col2:
         st.plotly_chart(fig_bar, use_container_width=True)
         st.markdown("""
-            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.3); border-radius: 5px;'>
-            <b>Non-Linear Escalation:</b> The relationship between warming and hot days accelerates dramatically. 
+            <p style='color: white; font-size: 14px; line-height: 1.6; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 5px;'>
+            <b style='color: #ff6b35;'>Non-Linear Escalation:</b> The relationship between warming and hot days accelerates dramatically. 
             The gap between 3°C and 4°C scenarios is far larger than 1.5°C to 2°C—demonstrating that every fraction 
             of a degree matters immensely. Maximum values (red line) reach extreme levels under 4°C warming.
             </p>
@@ -594,19 +600,19 @@ try:
     
     with col2:
         st.markdown("""
-            <div style='padding: 20px; background-color: rgba(0,0,0,0.3); border-radius: 10px; border-left: 4px solid #ff6b35;'>
+            <div style='padding: 20px; background-color: rgba(0,0,0,0.5); border-radius: 10px; border-left: 4px solid #ff6b35;'>
             <h4 style='color: #ff6b35; margin-top: 0;'>Key Regional Insights</h4>
             <p style='color: white; font-size: 14px; line-height: 1.8;'>
-            <b>Scotland:</b> Starting from the lowest baseline, Scotland faces dramatic relative changes. 
+            <b style='color: #4169e1;'>Scotland:</b> Starting from the lowest baseline, Scotland faces dramatic relative changes. 
             Infrastructure and ecosystems adapted to cool climates will face unprecedented heat stress.<br><br>
             
-            <b>Northern England:</b> Shows moderate absolute increases but significant relative change. 
+            <b style='color: #ff6b35;'>Northern England:</b> Shows moderate absolute increases but significant relative change. 
             Urban areas like Manchester and Leeds will need substantial adaptation measures.<br><br>
             
-            <b>Midlands:</b> The transition zone experiences both absolute and relative increases. 
+            <b style='color: #ffd700;'>Midlands:</b> The transition zone experiences both absolute and relative increases. 
             Critical transport and industrial infrastructure concentrated here faces compounding heat risks.<br><br>
             
-            <b>Southern England:</b> Already experiencing the most hot days in baseline period, this region 
+            <b style='color: #ff4500;'>Southern England:</b> Already experiencing the most hot days in baseline period, this region 
             faces the highest absolute increases. London and southeastern cities will require comprehensive 
             cooling strategies and public health interventions.
             </p>
@@ -627,29 +633,29 @@ try:
     
     with stats_col1:
         st.markdown(f"""
-            <div style='padding: 15px; background-color: rgba(255, 107, 53, 0.2); border-radius: 8px; border: 2px solid #ff6b35;'>
+            <div style='padding: 15px; background-color: rgba(255, 107, 53, 0.3); border-radius: 8px; border: 2px solid #ff6b35;'>
                 <h4 style='color: #ff6b35; margin: 0;'>Most Affected Area</h4>
-                <p style='color: white; margin: 10px 0 5px 0; font-size: 20px;'>{df.loc[df[scenario_col].idxmax(), 'Latitude']:.2f}°N, {df.loc[df[scenario_col].idxmax(), 'Longitude']:.2f}°W</p>
-                <p style='color: #ffaa80; font-size: 14px; margin: 0;'>{df[scenario_col].max():.1f} hot days/year projected</p>
+                <p style='color: white; margin: 10px 0 5px 0; font-size: 18px; font-weight: bold;'>{df.loc[df[scenario_col].idxmax(), 'Latitude']:.2f}°N, {df.loc[df[scenario_col].idxmax(), 'Longitude']:.2f}°W</p>
+                <p style='color: white; font-size: 14px; margin: 0;'>{df[scenario_col].max():.1f} hot days/year projected</p>
             </div>
         """, unsafe_allow_html=True)
     
     with stats_col2:
         st.markdown(f"""
-            <div style='padding: 15px; background-color: rgba(255, 69, 0, 0.2); border-radius: 8px; border: 2px solid #ff4500;'>
+            <div style='padding: 15px; background-color: rgba(255, 69, 0, 0.3); border-radius: 8px; border: 2px solid #ff4500;'>
                 <h4 style='color: #ff4500; margin: 0;'>Largest Increase</h4>
-                <p style='color: white; margin: 10px 0 5px 0; font-size: 20px;'>{df.loc[df['change'].idxmax(), 'Latitude']:.2f}°N, {df.loc[df['change'].idxmax(), 'Longitude']:.2f}°W</p>
-                <p style='color: #ff9966; font-size: 14px; margin: 0;'>+{df['change'].max():.1f} days/year increase</p>
+                <p style='color: white; margin: 10px 0 5px 0; font-size: 18px; font-weight: bold;'>{df.loc[df['change'].idxmax(), 'Latitude']:.2f}°N, {df.loc[df['change'].idxmax(), 'Longitude']:.2f}°W</p>
+                <p style='color: white; font-size: 14px; margin: 0;'>+{df['change'].max():.1f} days/year increase</p>
             </div>
         """, unsafe_allow_html=True)
     
     with stats_col3:
         median_change = df['change'].median()
         st.markdown(f"""
-            <div style='padding: 15px; background-color: rgba(220, 20, 60, 0.2); border-radius: 8px; border: 2px solid #dc143c;'>
+            <div style='padding: 15px; background-color: rgba(220, 20, 60, 0.3); border-radius: 8px; border: 2px solid #dc143c;'>
                 <h4 style='color: #dc143c; margin: 0;'>Median UK Change</h4>
-                <p style='color: white; margin: 10px 0 5px 0; font-size: 20px;'>+{median_change:.1f} days/year</p>
-                <p style='color: #ff6b9d; font-size: 14px; margin: 0;'>Typical increase across UK</p>
+                <p style='color: white; margin: 10px 0 5px 0; font-size: 18px; font-weight: bold;'>+{median_change:.1f} days/year</p>
+                <p style='color: white; font-size: 14px; margin: 0;'>Typical increase across UK</p>
             </div>
         """, unsafe_allow_html=True)
     
@@ -664,7 +670,7 @@ try:
                 width: 100%;
                 text-align: center;
                 font-size: 14px;
-                color: rgba(255, 255, 255, 0.6);
+                color: rgba(255, 255, 255, 0.8);
                 background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
                 padding: 20px 0;
                 margin-top: 40px;
@@ -673,12 +679,11 @@ try:
         </style>
         <div class="footer">
             © 2025 UK Heatwave Projections Dashboard | Data Source: Met Office Climate Data Portal<br>
-            <a href="https://climatedataportal.metoffice.gov.uk" style="color: #ff6b35; text-decoration: none;">Visit Met Office Climate Portal</a> | 
+            <a href="https://climatedataportal.metoffice.gov.uk" style="color: #ff6b35; text-decoration: none; font-weight: bold;">Visit Met Office Climate Portal</a> | 
             Analysis following Edward Tufte's visualization principles
         </div>
         """,
-        unsafe_allow_html=True
-    )
+        unsafe_allow_html=True)
 
 except FileNotFoundError:
     st.error("❌ CSV file not found! Make sure 'Annual_Count_of_Hot_Days___Projections__12km_grid__-7336973101011391426.csv' is in the same directory as this script.")
